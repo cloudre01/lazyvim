@@ -16,6 +16,8 @@ return {
         "sql",
         "zig",
         "graphql",
+        "scss",
+        "css",
       },
     },
   },
