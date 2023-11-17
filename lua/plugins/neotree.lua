@@ -1,4 +1,4 @@
-local events = require("neo-tree.events")
+-- local events = require("neo-tree.events")
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -7,6 +7,7 @@ return {
         width = 35,
       },
       filesystem = {
+        visible = true,
         commands = {
           delete = function(state)
             local inputs = require("neo-tree.ui.inputs")
