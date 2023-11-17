@@ -7,7 +7,9 @@ return {
         width = 35,
       },
       filesystem = {
-        visible = true,
+        filtered_items = {
+          visible = true,
+        },
         commands = {
           delete = function(state)
             local inputs = require("neo-tree.ui.inputs")
