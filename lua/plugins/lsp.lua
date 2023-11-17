@@ -6,26 +6,34 @@ return {
         eslint = {},
 
         svelte = {
-          filetypes = { "svelte", "html", "css" },
-          plugin = {
+          settings = {
             svelte = {
-              compilerWarnings = {
-                ["a11y-click-events-have-key-events"] = "ignore",
-                ["a11y-no-static-element-interactions"] = "ignore",
-                ["a11y-no-noninteractive-tabindex"] = "ignore",
+              filetypes = { "typescript", "javascript", "svelte", "html", "css" },
+              plugin = {
+                svelte = {
+                  compilerWarnings = {
+                    ["a11y-click-events-have-key-events"] = "ignore",
+                    ["a11y-no-static-element-interactions"] = "ignore",
+                    ["a11y-no-noninteractive-tabindex"] = "ignore",
+                  },
+                },
               },
             },
           },
         },
 
         graphql = {
-          filetypes = { "graphql", "typescript", "typescriptreact" },
+          settings = {
+            filetypes = { "graphql", "typescript", "typescriptreact" },
+          },
         },
 
         solidity_ls_nomicfoundation = {
-          cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
-          filetypes = { "solidity" },
-          single_file_support = true,
+          settings = {
+            cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
+            filetypes = { "solidity" },
+            single_file_support = true,
+          },
         },
       },
       setup = {
