@@ -13,8 +13,16 @@ local function getTelescopeOpts(state, path)
         if filename == nil then
           filename = selection[1]
         end
+        local lnum = selection.lnum
+        local col = selection.col
         -- any way to open the file without triggering auto-close event of neo-tree?
-        require("neo-tree.sources.filesystem").navigate(state, state.path, filename)
+        -- require("neo-tree.sources.filesystem").navigate(state, state.path, filename)
+        vim.cmd("edit " .. filename)
+        if lnum ~= nil and col ~= nil then
+          vim.schedule(function()
+            vim.api.nvim_win_set_cursor(0, { lnum, col - 1 })
+          end)
+        end
       end)
       return true
     end,

@@ -35,6 +35,31 @@ return {
             single_file_support = true,
           },
         },
+
+        pyright = {
+          capabilities = (function()
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+            return capabilities
+          end)(),
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+                diagnosticSeverityOverrides = {
+                  reportUnusedVariable = "warning",
+                },
+                typeCheckingMode = "off",
+              },
+            },
+          },
+        },
+
+        ruff_lsp = {},
+        --
+        -- jedi_language_server = {},
       },
       setup = {
         eslint = function()
@@ -46,6 +71,24 @@ return {
             end
           end)
         end,
+
+        ruff_lsp = function()
+          require("lazyvim.util").lsp.on_attach(function(client, _)
+            if client.name == "ruff_lsp" then
+              -- Disable hover in favor of Pyright
+              client.server_capabilities.hoverProvider = false
+            end
+          end)
+        end,
+
+        -- pyright = function()
+        --   require("lazyvim.util").lsp.on_attach(function(client, _)
+        --     if client.name == "pyright" then
+        --       -- disable hover in favor of jedi-language-server
+        --       client.server_capabilities.hoverProvider = false
+        --     end
+        --   end)
+        -- end,
       },
     },
   },
