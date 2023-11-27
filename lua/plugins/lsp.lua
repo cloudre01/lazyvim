@@ -58,6 +58,8 @@ return {
         },
 
         ruff_lsp = {},
+
+        prismals = {},
         --
         -- jedi_language_server = {},
       },

@@ -18,6 +18,7 @@ return {
         "graphql",
         "scss",
         "css",
+        "prisma",
       },
     },
   },
