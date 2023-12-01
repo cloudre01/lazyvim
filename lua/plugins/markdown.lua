@@ -5,7 +5,7 @@ return {
     ft = "markdown",
     keys = {
       {
-        "gm",
+        "<leader>gm",
         "<cmd>MarkdownPreviewToggle<cr>",
         desc = "Markdown Preview",
         ft = "markdown",
