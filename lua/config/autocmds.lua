@@ -24,6 +24,6 @@
 -- })
 
 -- when cmp completion is loaded, clear the virtual text from codium
-require("cmp").event:on("menu_opened", function()
-  vim.fn["codeium#Clear"]()
-end)
+-- require("cmp").event:on("menu_opened", function()
+--   vim.fn["codeium#Clear"]()
+-- end)
