@@ -4,3 +4,4 @@
 
 vim.wo.conceallevel = 0
 vim.g.codeium_disable_bindings = 1
+vim.g.tmux_navigator_no_mappings = 1
