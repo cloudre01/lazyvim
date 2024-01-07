@@ -3,6 +3,12 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
+        astro = {},
+
+        cssls = {},
+
+        sqlls = {},
+
         eslint = {},
 
         svelte = {
