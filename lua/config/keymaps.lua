@@ -33,3 +33,6 @@ keymap("t", [[<C-\>]], "<cmd>close<cr>", { desc = "Hide Terminal" })
 
 -- Tmux sessionizer
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts)
+
+-- Git
+keymap("n", "<leader>gb", "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", { desc = "Toggle blame" })
