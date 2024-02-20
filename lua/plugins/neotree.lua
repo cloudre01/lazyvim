@@ -42,6 +42,10 @@ return {
             "telescope_grep",
             desc = "Grep (in node directory)",
           },
+          ["o"] = {
+            "system_open",
+            desc = "System open",
+          },
         },
         width = 35,
       },
@@ -50,6 +54,11 @@ return {
           visible = true,
         },
         commands = {
+          system_open = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            vim.fn.jobstart({ "open", path }, { detach = true })
+          end,
           delete = function(state)
             local inputs = require("neo-tree.ui.inputs")
             local path = state.tree:get_node().path
