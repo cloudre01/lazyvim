@@ -1,10 +1,14 @@
 return {
   {
     "hrsh7th/nvim-cmp",
-    opts = {
-      experimental = {
-        ghost_text = false,
-      },
-    },
+    opts = function(_, opts)
+      local cmp = require("cmp")
+      opts.mapping = vim.tbl_deep_extend("force", opts.mapping, {
+        ["<C-CR>"] = function(fallback)
+          cmp.mapping.abort()
+          fallback()
+        end,
+      })
+    end,
   },
 }

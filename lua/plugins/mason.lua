@@ -9,6 +9,7 @@ return {
         "sqlls",
         "sql-formatter",
         "astro-language-server",
+        "js-debug-adapter",
       })
     end,
   },
