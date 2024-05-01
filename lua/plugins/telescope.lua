@@ -19,6 +19,7 @@ local multi_rg = function(opts)
       ["l"] = "*.lua",
       ["v"] = "*.vim",
       ["n"] = "*.{vim,lua}",
+      ["t"] = "*.ts",
       ["c"] = "*.c",
       ["r"] = "*.rs",
       ["g"] = "*.go",
@@ -32,6 +33,7 @@ local multi_rg = function(opts)
       end
 
       local prompt_split = vim.split(prompt, "  ")
+      local last_segment = prompt_split[#prompt_split]
 
       local args = { "rg" }
       if prompt_split[1] then
@@ -39,14 +41,14 @@ local multi_rg = function(opts)
         table.insert(args, prompt_split[1])
       end
 
-      if prompt_split[2] then
+      if last_segment and last_segment ~= prompt_split[1] then
         table.insert(args, "-g")
 
         local pattern
-        if opts.shortcuts[prompt_split[2]] then
-          pattern = opts.shortcuts[prompt_split[2]]
+        if opts.shortcuts[last_segment] then
+          pattern = opts.shortcuts[last_segment]
         else
-          pattern = prompt_split[2]
+          pattern = last_segment
         end
 
         table.insert(args, string.format(opts.pattern, pattern))
