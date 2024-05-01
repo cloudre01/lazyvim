@@ -53,6 +53,7 @@ return {
         filtered_items = {
           visible = true,
         },
+        check_gitignore_in_search = false,
         commands = {
           system_open = function(state)
             local node = state.tree:get_node()
