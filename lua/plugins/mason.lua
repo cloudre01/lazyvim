@@ -10,6 +10,8 @@ return {
         "sql-formatter",
         "astro-language-server",
         "js-debug-adapter",
+        "ruff",
+        "mypy",
       })
     end,
   },

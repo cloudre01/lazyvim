@@ -1,10 +1,10 @@
+local utils = require("utils")
+
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        astro = {},
-
         cssls = {},
 
         sqlls = {},
@@ -43,27 +43,30 @@ return {
         },
 
         pyright = {
-          capabilities = (function()
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-            return capabilities
-          end)(),
+          -- capabilities = (function()
+          --   local capabilities = vim.lsp.protocol.make_client_capabilities()
+          --   capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+          --   return capabilities
+          -- end)(),
           settings = {
             python = {
               analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "openFilesOnly",
-                useLibraryCodeForTypes = true,
+                --   autoSearchPaths = true,
+                --   diagnosticMode = "openFilesOnly",
+                --   useLibraryCodeForTypes = true,
                 diagnosticSeverityOverrides = {
                   reportUnusedVariable = "warning",
                 },
-                typeCheckingMode = "off",
+                --   typeCheckingMode = "off",
               },
+              pythonPath = utils.get_venv(),
             },
           },
         },
 
-        ruff_lsp = {},
+        ruff_lsp = {
+          init_options = { settings = { args = { "--ignore=F403", "--ignore=F405" } } },
+        },
 
         prismals = {},
         --

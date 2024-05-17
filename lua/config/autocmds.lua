@@ -27,7 +27,7 @@
 -- require("cmp").event:on("menu_opened", function()
 --   vim.fn["codeium#Clear"]()
 -- end)
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = ".env.*",
-  command = "set filetype=sh",
-})
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+--   pattern = ".env.*",
+--   command = "set filetype=sh",
+-- })
