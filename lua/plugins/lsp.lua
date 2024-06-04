@@ -4,6 +4,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      inlay_hints = {
+        enabled = false,
+      },
       servers = {
         cssls = {},
 
@@ -73,6 +76,10 @@ return {
         -- jedi_language_server = {},
       },
       setup = {
+        rust_analyzer = function()
+          return true
+        end,
+
         eslint = function()
           require("lazyvim.util").lsp.on_attach(function(client)
             if client.name == "eslint" then
