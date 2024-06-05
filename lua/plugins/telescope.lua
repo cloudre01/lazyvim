@@ -93,16 +93,13 @@ return {
         },
       },
     },
-    pickers = {
-      find_files = {
-        find_command = { "rg", "--files", "--hidden", "-g", "!.git", "--no-ignore-vcs" },
-      },
-    },
   },
   keys = {
     { "<leader>/", false },
-    { "<leadeR>fg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-    { "<leadeR>fG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+    { "<leader>fG", LazyVim.telescope("live_grep"), desc = "Grep (root dir)" },
+    { "<leader>fg", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+    { "<leader>fF", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+    { "<leader>ff", LazyVim.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
     { "<leader>fm", multi_rg, desc = "Live grep (with shortcuts)" },
   },
 }
