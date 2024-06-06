@@ -5,3 +5,19 @@
 vim.wo.conceallevel = 0
 vim.g.codeium_disable_bindings = 1
 vim.g.tmux_navigator_no_mappings = 1
+vim.filetype.add({
+  extension = {
+    conf = "conf",
+    env = "sh",
+    tiltfile = "tiltfile",
+    Tiltfile = "tiltfile",
+  },
+  filename = {
+    [".env"] = "sh",
+    ["tsconfig.json"] = "jsonc",
+    [".yamlfmt"] = "yaml",
+  },
+  pattern = {
+    ["%.env%.[%w_.-]+"] = "sh",
+  },
+})
