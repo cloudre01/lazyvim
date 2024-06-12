@@ -1,3 +1,7 @@
+local colors = {
+  light_gray = "#9c9a9a",
+}
+
 return {
   {
     "LazyVim/LazyVim",
@@ -7,6 +11,12 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    opts = { style = "storm" },
+    opts = {
+      style = "storm",
+      on_highlights = function(hl, _)
+        hl.lineNrAbove = { fg = colors.light_gray }
+        hl.lineNrBelow = { fg = colors.light_gray }
+      end,
+    },
   },
 }

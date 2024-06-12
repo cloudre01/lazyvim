@@ -96,10 +96,10 @@ return {
   },
   keys = {
     { "<leader>/", false },
-    { "<leader>fG", LazyVim.telescope("live_grep"), desc = "Grep (root dir)" },
-    { "<leader>fg", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
-    { "<leader>fF", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
-    { "<leader>ff", LazyVim.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
+    { "<leader>fG", LazyVim.pick("live_grep"), desc = "Grep (root dir)" },
+    { "<leader>fg", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+    { "<leader>fF", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+    { "<leader>ff", LazyVim.pick("find_files", { root = false }), desc = "Find Files (cwd)" },
     { "<leader>fm", multi_rg, desc = "Live grep (with shortcuts)" },
   },
 }
