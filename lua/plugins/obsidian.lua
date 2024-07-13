@@ -23,7 +23,14 @@ return {
         path = "~/Documents/Obsidian Vault/",
       },
     },
-
-    -- see below for full list of options 👇
+  },
+  keys = {
+    {
+      "<leader>nn",
+      function()
+        require("obsidian").get_client():command("ObsidianNew", { args = "New note" })
+      end,
+      desc = "New Obsidian note",
+    },
   },
 }
