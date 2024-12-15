@@ -1,4 +1,6 @@
 local utils = require("utils")
+local lsp = require("lspconfig")
+local rell_lsp_path = "~/.vscode/extensions/chromaway.rell-language-extension-0.6.7-darwin-arm64/server/"
 
 return {
   {
@@ -13,6 +15,22 @@ return {
         sqlls = {},
 
         eslint = {},
+
+        ts_ls = {
+          enabled = false,
+        },
+
+        -- rell = {
+        --   cmd = {
+        --     rell_lsp_path .. "minimal-jre/bin/java",
+        --     "-Duser.language=en",
+        --     "-Duser.region=US",
+        --     "-jar",
+        --     rell_lsp_path .. "rell-language-server-0.4.9.jar",
+        --   },
+        --   filetypes = { "rell" },
+        --   root_dir = lsp.util.root_pattern(".git", ".rell_format"),
+        -- },
 
         svelte = {
           settings = {

@@ -31,3 +31,7 @@
 --   pattern = ".env.*",
 --   command = "set filetype=sh",
 -- })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.rell",
+  command = "set filetype=rell",
+})

@@ -24,9 +24,9 @@ end, { noremap = true, silent = true, expr = true, replace_keycodes = false, des
 -- keymap("i", "<A-]>", function()
 --   return vim.fn["codeium#CycleCompletions"](-1)
 -- end, { noremap = true, silent = true, expr = true, desc = "Codeium Previous" })
-keymap("n", "<leader>ac", function()
-  return vim.fn["codeium#Chat"]()
-end, { noremap = true, silent = true, expr = true, desc = "Codeium Chat" })
+-- keymap("n", "<leader>ac", function()
+--   return vim.fn["codeium#Chat"]()
+-- end, { noremap = true, silent = true, expr = true, desc = "Codeium Chat" })
 
 -- Copilot
 -- vim.keymap.set("i", "<A-a>", 'copilot#Accept("\\<A-a>")', {
@@ -46,3 +46,6 @@ keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gB", "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", { desc = "Toggle blame" })
+
+-- Kulala
+keymap("n", "<leader>Rs", "<cmd>lua require('kulala').scratchpad()<cr>", { desc = "Open scratchpad" })
