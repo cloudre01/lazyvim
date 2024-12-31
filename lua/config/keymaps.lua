@@ -49,3 +49,6 @@ keymap("n", "<leader>gB", "<cmd>lua require 'gitsigns'.toggle_current_line_blame
 
 -- Kulala
 keymap("n", "<leader>Rs", "<cmd>lua require('kulala').scratchpad()<cr>", { desc = "Open scratchpad" })
+
+-- Comment line
+keymap("v", "<leader>/", "gcc", { remap = true, desc = "Toggle comment for selection" })

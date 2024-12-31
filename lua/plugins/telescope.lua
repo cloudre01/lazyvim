@@ -75,31 +75,31 @@ local multi_rg = function(opts)
 end
 
 return {
-  "nvim-telescope/telescope.nvim",
-  opts = {
-    defaults = {
-      prompt_prefix = " ",
-      selection_caret = " ",
-      path_display = { "smart" },
-      file_ignore_patterns = { ".git/", "node_modules" },
-      mappings = {
-        i = {
-          ["<Down>"] = actions.move_selection_next,
-          ["<Up>"] = actions.move_selection_previous,
-          ["<C-j>"] = actions.move_selection_next,
-          ["<C-k>"] = actions.move_selection_previous,
-          ["<M-u>"] = actions.results_scrolling_down,
-          ["<M-d>"] = actions.results_scrolling_up,
-        },
-      },
-    },
-  },
-  keys = {
-    { "<leader>/", false },
-    { "<leader>fG", LazyVim.pick("live_grep"), desc = "Grep (root dir)" },
-    { "<leader>fg", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
-    { "<leader>fF", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-    { "<leader>ff", LazyVim.pick("find_files", { root = false }), desc = "Find Files (cwd)" },
-    { "<leader>fm", multi_rg, desc = "Live grep (with shortcuts)" },
-  },
+  -- "nvim-telescope/telescope.nvim",
+  -- opts = {
+  --   defaults = {
+  --     prompt_prefix = " ",
+  --     selection_caret = " ",
+  --     path_display = { "smart" },
+  --     file_ignore_patterns = { ".git/", "node_modules" },
+  --     mappings = {
+  --       i = {
+  --         ["<Down>"] = actions.move_selection_next,
+  --         ["<Up>"] = actions.move_selection_previous,
+  --         ["<C-j>"] = actions.move_selection_next,
+  --         ["<C-k>"] = actions.move_selection_previous,
+  --         ["<M-u>"] = actions.results_scrolling_down,
+  --         ["<M-d>"] = actions.results_scrolling_up,
+  --       },
+  --     },
+  --   },
+  -- },
+  -- keys = {
+  --   { "<leader>/", false },
+  --   { "<leader>fG", LazyVim.pick("live_grep"), desc = "Grep (root dir)" },
+  --   { "<leader>fg", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+  --   { "<leader>fF", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+  --   { "<leader>ff", LazyVim.pick("find_files", { root = false }), desc = "Find Files (cwd)" },
+  --   { "<leader>fm", multi_rg, desc = "Live grep (with shortcuts)" },
+  -- },
 }
