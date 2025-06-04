@@ -30,6 +30,9 @@ return {
         sql = { "pg_format" },
         ["astro"] = { "prettier" },
       },
+      ft_parsers = {
+        yaml = "yaml",
+      },
     },
   },
 }

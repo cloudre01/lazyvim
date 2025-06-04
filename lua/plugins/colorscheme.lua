@@ -14,8 +14,8 @@ return {
     opts = {
       style = "storm",
       on_highlights = function(hl, _)
-        hl.lineNrAbove = { fg = colors.light_gray }
-        hl.lineNrBelow = { fg = colors.light_gray }
+        hl.LineNrAbove = { fg = colors.light_gray }
+        hl.LineNrBelow = { fg = colors.light_gray }
       end,
     },
   },

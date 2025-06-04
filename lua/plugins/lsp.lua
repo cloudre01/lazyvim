@@ -1,6 +1,6 @@
 local utils = require("utils")
 local lsp = require("lspconfig")
-local rell_lsp_path = "~/.vscode/extensions/chromaway.rell-language-extension-0.6.7-darwin-arm64/server/"
+-- local rell_lsp_path = "~/.vscode/extensions/chromaway.rell-language-extension-0.6.7-darwin-arm64/server/"
 
 return {
   {
@@ -14,11 +14,21 @@ return {
 
         sqlls = {},
 
-        eslint = {},
+        eslint = {
+          settings = {
+            workingDirectories = { mode = "auto" },
+            experimental = {
+              -- allows to use flat config format
+              -- useFlatConfig = true,
+            },
+          },
+        },
 
         ts_ls = {
           enabled = false,
         },
+
+        yamlls = {},
 
         -- rell = {
         --   cmd = {
@@ -31,6 +41,13 @@ return {
         --   filetypes = { "rell" },
         --   root_dir = lsp.util.root_pattern(".git", ".rell_format"),
         -- },
+
+        denols = {
+          filetypes = { "typescript", "typescriptreact" },
+          root_dir = function(...)
+            return lsp.util.root_pattern("deno.jsonc", "deno.json")(...)
+          end,
+        },
 
         svelte = {
           settings = {
@@ -98,15 +115,15 @@ return {
           return true
         end,
 
-        eslint = function()
-          require("lazyvim.util").lsp.on_attach(function(client)
-            if client.name == "eslint" then
-              client.server_capabilities.documentFormattingProvider = true
-            elseif client.name == "tsserver" then
-              client.server_capabilities.documentFormattingProvider = false
-            end
-          end)
-        end,
+        -- eslint = function()
+        --   require("lazyvim.util").lsp.on_attach(function(client)
+        --     if client.name == "eslint" then
+        --       client.server_capabilities.documentFormattingProvider = true
+        --     elseif client.name == "tsserver" then
+        --       client.server_capabilities.documentFormattingProvider = false
+        --     end
+        --   end)
+        -- end,
 
         ruff_lsp = function()
           require("lazyvim.util").lsp.on_attach(function(client, _)
