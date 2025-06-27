@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 local keymap = vim.keymap.set
+local keymap_del = vim.keymap.del
 local opts = { noremap = true, silent = true }
 
 local Util = require("lazyvim.util")
@@ -49,3 +50,47 @@ keymap("n", "<leader>gB", "<cmd>lua require 'gitsigns'.toggle_current_line_blame
 
 -- Kulala
 keymap("n", "<leader>Rs", "<cmd>lua require('kulala').scratchpad()<cr>", { desc = "Open scratchpad" })
+
+-- Telescope
+keymap_del("n", "<leader>sg")
+keymap("n", "<leader>sg", function()
+  local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
+  local builtin = require("telescope.builtin")
+
+  local function grep_with_glob(_opts)
+    opts = _opts or {}
+    opts.cwd = require("lazyvim.util").root.get()
+
+    opts.attach_mappings = function(_, map)
+      map({ "n", "i" }, "<C-m>", function(prompt_bufnr)
+        local input = action_state.get_current_line():gsub("%c", "")
+        actions.close(prompt_bufnr)
+
+        Snacks.input({
+          prompt = "Glob pattern (e.g. *.ts): ",
+        }, function(glob)
+          vim.cmd("stopinsert")
+          if glob then
+            vim.schedule(function()
+              grep_with_glob({
+                default_text = input,
+                glob_pattern = glob,
+              })
+            end)
+          end
+        end)
+
+        vim.defer_fn(function()
+          vim.cmd("startinsert")
+        end, 10)
+      end, { noremap = true, silent = true })
+
+      return true
+    end
+
+    builtin.live_grep(opts)
+  end
+
+  grep_with_glob()
+end, { desc = "Grep (Root Dir) + glob" })
