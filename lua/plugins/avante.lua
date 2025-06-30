@@ -3,68 +3,70 @@ return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     dependencies = {
-      "stevearc/dressing.nvim",
-      "ibhagwan/fzf-lua",
+      {
+        "ravitemer/mcphub.nvim",
+        cmd = "MCPHub",
+        build = "npm install -g mcp-hub@latest",
+        opts = {},
+        keys = {
+          { "<leader>am", "<cmd>MCPHub<cr>", mode = { "n" }, desc = "MCP Hub" },
+        },
+      },
     },
     opts = {
-      -- Default configuration
       hints = { enabled = false },
-
-      ---@alias AvanteProvider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
       provider = "claude", -- Recommend using Claude
-      auto_suggestions_provider = "claude", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
           timeout = 30000, -- 30 seconds
-          model = "claude-3-5-sonnet-20241022",
+          model = "claude-sonnet-4-20250514",
           extra_request_body = {
-            temperature = 0,
-            max_tokens = 4096,
+            temperature = 0.75,
+            max_tokens = 20480,
           },
         },
       },
+      auto_suggestions_provider = nil,
+      behaviour = {
+        auto_suggestions = false,
+      },
 
       -- File selector configuration
-      --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
       file_selector = {
-        provider = "fzf", -- Avoid native provider issues
+        provider = "snacks", -- Avoid native provider issues
         provider_opts = {},
       },
+      selector = { provider = "snacks" },
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub and hub:get_active_servers_prompt() or ""
+      end,
+      custom_tools = function()
+        return {
+          require("mcphub.extensions.avante").mcp_tool(),
+        }
+      end,
+      extensions = {
+        avante = {
+          make_slash_commands = true,
+        },
+      },
+      input = { provider = "snacks" },
     },
     build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
   },
   {
-    "saghen/blink.cmp",
+    "Kaiser-Yang/blink-cmp-avante",
     lazy = true,
-    dependencies = { "saghen/blink.compat" },
-    opts = {
-      sources = {
-        default = { "avante_commands", "avante_mentions", "avante_files" },
-        compat = {
-          "avante_commands",
-          "avante_mentions",
-          "avante_files",
-        },
-        -- LSP score_offset is typically 60
-        providers = {
-          avante_commands = {
-            name = "avante_commands",
-            module = "blink.compat.source",
-            score_offset = 90,
-            opts = {},
-          },
-          avante_files = {
-            name = "avante_files",
-            module = "blink.compat.source",
-            score_offset = 100,
-            opts = {},
-          },
-          avante_mentions = {
-            name = "avante_mentions",
-            module = "blink.compat.source",
-            score_offset = 1000,
-            opts = {},
+    specs = {
+      {
+        "saghen/blink.cmp",
+        optional = true,
+        opts = {
+          sources = {
+            default = { "avante" },
+            providers = { avante = { module = "blink-cmp-avante", name = "Avante" } },
           },
         },
       },
@@ -85,7 +87,7 @@ return {
     optional = true,
     opts = {
       spec = {
-        { "<leader>a", group = "ai" },
+        { "<leader>a", desc = "ai" },
       },
     },
   },
