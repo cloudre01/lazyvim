@@ -63,7 +63,7 @@ keymap("n", "<leader>sg", function()
     opts.cwd = require("lazyvim.util").root.get()
 
     opts.attach_mappings = function(_, map)
-      map({ "n", "i" }, "<C-m>", function(prompt_bufnr)
+      map({ "n", "i" }, "<C-t>", function(prompt_bufnr)
         local input = action_state.get_current_line():gsub("%c", "")
         actions.close(prompt_bufnr)
 
