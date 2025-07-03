@@ -1,3 +1,9 @@
+local items = {
+  { label = "Current file vs HEAD", cmd = "DiffviewOpen HEAD -- %" },
+  { label = "Working tree vs HEAD", cmd = "DiffviewOpen" },
+  { label = "Staged changes vs HEAD", cmd = "DiffviewOpen --staged" },
+}
+
 return {
   {
     "sindrets/diffview.nvim",
@@ -60,6 +66,23 @@ return {
           })
         end,
         desc = "Diffview Commit",
+      },
+      {
+        "<leader>gdd",
+        function()
+          Snacks.picker.select(items, {
+            prompt = "Diffview Options",
+            format_item = function(item)
+              return item.label
+            end,
+            kind = "diffview",
+          }, function(choice)
+            if choice and choice.cmd then
+              vim.cmd(choice.cmd)
+            end
+          end)
+        end,
+        desc = "Open diffview menu",
       },
     },
   },
