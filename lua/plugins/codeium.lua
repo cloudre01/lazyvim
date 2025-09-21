@@ -1,6 +1,6 @@
-return {}
--- return {
---   {
---     "Exafunction/codeium.vim",
---   },
--- }
+-- return {}
+return {
+  {
+    "Exafunction/codeium.vim",
+  },
+}
