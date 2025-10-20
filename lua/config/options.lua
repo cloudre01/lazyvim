@@ -16,12 +16,8 @@ vim.filetype.add({
     Tiltfile = "tiltfile",
   },
   filename = {
-    [".env"] = "dotenv",
     ["tsconfig.json"] = "jsonc",
     [".yamlfmt"] = "yaml",
     ["*.log"] = "log",
-  },
-  pattern = {
-    ["%.env%.[%w_.-]+"] = "dotenv",
   },
 })
