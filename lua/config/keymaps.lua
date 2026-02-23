@@ -16,25 +16,25 @@ end
 keymap("i", "jk", "<ESC>", opts)
 
 -- Codeium
-keymap("i", "<A-a>", function()
-  return vim.fn["codeium#Accept"]()
-end, { noremap = true, silent = true, expr = true, replace_keycodes = false, desc = "Codeium Accept" })
-keymap("i", "<A-[>", function()
-  return vim.fn["codeium#CycleCompletions"](1)
-end, { noremap = true, silent = true, expr = true, desc = "Codeium Next" })
-keymap("i", "<A-]>", function()
-  return vim.fn["codeium#CycleCompletions"](-1)
-end, { noremap = true, silent = true, expr = true, desc = "Codeium Previous" })
-keymap("n", "<leader>ac", function()
-  return vim.fn["codeium#Chat"]()
-end, { noremap = true, silent = true, expr = true, desc = "Codeium Chat" })
+-- keymap("i", "<A-a>", function()
+--   return vim.fn["codeium#Accept"]()
+-- end, { noremap = true, silent = true, expr = true, replace_keycodes = false, desc = "Codeium Accept" })
+-- keymap("i", "<A-[>", function()
+--   return vim.fn["codeium#CycleCompletions"](1)
+-- end, { noremap = true, silent = true, expr = true, desc = "Codeium Next" })
+-- keymap("i", "<A-]>", function()
+--   return vim.fn["codeium#CycleCompletions"](-1)
+-- end, { noremap = true, silent = true, expr = true, desc = "Codeium Previous" })
+-- keymap("n", "<leader>ac", function()
+--   return vim.fn["codeium#Chat"]()
+-- end, { noremap = true, silent = true, expr = true, desc = "Codeium Chat" })
 
 -- Copilot
--- vim.keymap.set("i", "<A-a>", 'copilot#Accept("\\<A-a>")', {
---   expr = true,
---   replace_keycodes = false,
--- })
--- vim.g.copilot_no_tab_map = true
+vim.keymap.set("i", "<A-a>", 'copilot#Accept("\\<A-a>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true
 
 -- Normal --
 keymap("n", [[<C-\>]], lazyterm, { desc = "Open Terminal" })
