@@ -1,33 +1,15 @@
 -- local events = require("neo-tree.events")
-local function getTelescopeOpts(state, path)
-  return {
-    cwd = path,
-    search_dirs = { path },
-    attach_mappings = function(prompt_bufnr, map)
-      local actions = require("telescope.actions")
-      actions.select_default:replace(function()
-        actions.close(prompt_bufnr)
-        local action_state = require("telescope.actions.state")
-        local selection = action_state.get_selected_entry()
-        local filename = selection.filename
-        if filename == nil then
-          filename = selection[1]
-        end
-        local lnum = selection.lnum
-        local col = selection.col
-        -- any way to open the file without triggering auto-close event of neo-tree?
-        -- require("neo-tree.sources.filesystem").navigate(state, state.path, filename)
-        vim.cmd("edit " .. filename)
-        if lnum ~= nil and col ~= nil then
-          vim.schedule(function()
-            vim.api.nvim_win_set_cursor(0, { lnum, col - 1 })
-          end)
-        end
-      end)
-      return true
-    end,
-  }
+
+local function get_node_search_path(state)
+  local node = state.tree:get_node()
+  local path = node:get_id()
+  local stat = (vim.uv or vim.loop).fs_stat(path)
+  if stat and stat.type == "file" then
+    return vim.fn.fnamemodify(path, ":h")
+  end
+  return path
 end
+
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -39,11 +21,11 @@ return {
       window = {
         mappings = {
           ["<leader>ff"] = {
-            "telescope_find",
+            "snacks_find",
             desc = "Find file (in node directory)",
           },
           ["<leader>fg"] = {
-            "telescope_grep",
+            "snacks_grep",
             desc = "Grep (in node directory)",
           },
           ["o"] = {
@@ -98,15 +80,19 @@ return {
               cmds.refresh(state)
             end)
           end,
-          telescope_find = function(state)
-            local node = state.tree:get_node()
-            local path = node:get_id()
-            require("telescope.builtin").find_files(getTelescopeOpts(state, path))
+          snacks_find = function(state)
+            local path = get_node_search_path(state)
+            Snacks.picker.files({
+              cwd = path,
+              dirs = { path },
+            })
           end,
-          telescope_grep = function(state)
-            local node = state.tree:get_node()
-            local path = node:get_id()
-            require("telescope.builtin").live_grep(getTelescopeOpts(state, path))
+          snacks_grep = function(state)
+            local path = get_node_search_path(state)
+            Snacks.picker.grep({
+              cwd = path,
+              dirs = { path },
+            })
           end,
         },
       },

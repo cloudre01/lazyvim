@@ -1,53 +1,4 @@
 local utils = require("utils")
-local lsp = require("lspconfig")
--- local rell_lsp_path = "~/.vscode/extensions/chromaway.rell-language-extension-0.6.7-darwin-arm64/server/"
-
-local function get_vscode_deno_settings(root_dir)
-  if not root_dir or root_dir == "" then
-    return nil
-  end
-
-  local settings_path = root_dir .. "/.vscode/settings.json"
-  if vim.fn.filereadable(settings_path) ~= 1 then
-    return nil
-  end
-
-  local ok, contents = pcall(vim.fn.readfile, settings_path)
-  if not ok then
-    return nil
-  end
-
-  local data = table.concat(contents, "\n")
-  local decoded_ok, decoded = pcall(vim.fn.json_decode, data)
-  if not decoded_ok or type(decoded) ~= "table" then
-    return nil
-  end
-
-  local deno_settings = {}
-
-  local enable_paths = decoded["deno.enablePaths"]
-  if type(enable_paths) == "table" then
-    deno_settings.enablePaths = enable_paths
-  end
-
-  local lint = decoded["deno.lint"]
-  if type(lint) == "boolean" then
-    deno_settings.lint = lint
-  end
-
-  local unstable = decoded["deno.unstable"]
-  if type(unstable) == "table" then
-    deno_settings.unstable = unstable
-  end
-
-  if next(deno_settings) == nil then
-    return nil
-  end
-
-  print(vim.inspect(deno_settings))
-
-  return deno_settings
-end
 
 return {
   {
@@ -73,6 +24,16 @@ return {
 
         ts_ls = {
           enabled = false,
+        },
+
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "Snacks" },
+              },
+            },
+          },
         },
 
         yamlls = {},
