@@ -29,6 +29,7 @@ return {
       formatters_by_ft = {
         sql = { "pg_format" },
         ["astro"] = { "prettier" },
+        swift = { "swiftformat" },
       },
       ft_parsers = {
         yaml = "yaml",

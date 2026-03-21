@@ -38,18 +38,6 @@ return {
 
         yamlls = {},
 
-        -- rell = {
-        --   cmd = {
-        --     rell_lsp_path .. "minimal-jre/bin/java",
-        --     "-Duser.language=en",
-        --     "-Duser.region=US",
-        --     "-jar",
-        --     rell_lsp_path .. "rell-language-server-0.4.9.jar",
-        --   },
-        --   filetypes = { "rell" },
-        --   root_dir = lsp.util.root_pattern(".git", ".rell_format"),
-        -- },
-
         svelte = {
           settings = {
             svelte = {
@@ -108,6 +96,25 @@ return {
         },
 
         prismals = {},
+
+        sourcekit = {
+          cmd = { "xcrun", "sourcekit-lsp" },
+          filetypes = { "swift" },
+          single_file_support = true,
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = {
+                dynamicRegistration = true,
+              },
+            },
+            textDocument = {
+              diagnostic = {
+                dynamicRegistration = true,
+                relatedDocumentSupport = true,
+              },
+            },
+          },
+        },
         --
         -- jedi_language_server = {},
       },
